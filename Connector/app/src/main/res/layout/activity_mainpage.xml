@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="81dp"
+        android:text="메인화면"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/signInBtn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_buttom"
+        android:text="@string/btn_sign_in"
+        android:textColor="@android:color/white"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="165dp" />
+
+    <Button
+        android:id="@+id/signUpBtn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_buttom"
+        android:text="@string/btn_sign_up"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/signInBtn"
+        android:layout_alignStart="@+id/signInBtn"
+        android:layout_marginTop="25dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="--------------- 또는 ---------------"
+        android:layout_below="@+id/signUpBtn"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/googleBtn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_buttom"
+        android:layout_marginTop="19dp"
+        android:text="@string/btn_google"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/signUpBtn" />
+
+    <Button
+        android:id="@+id/naverBtn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_buttom"
+        android:layout_alignStart="@+id/googleBtn"
+        android:layout_below="@+id/googleBtn"
+        android:layout_marginTop="30dp"
+        android:text="@string/btn_naver"
+        android:textColor="@android:color/white" />
+
+
+</RelativeLayout>
