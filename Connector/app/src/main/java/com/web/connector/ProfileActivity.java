@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -28,8 +26,12 @@ public class ProfileActivity extends AppCompatActivity {
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
 
+    private int pickMenu = 0;
+
     private Uri mImageCaptureUri;
-    private ImageView iv_UserPhoto;
+    private ImageView userProfilePhoto;
+    private ImageView backgroundImage;
+
     private String absoultePath;
 
     @Override
@@ -40,7 +42,9 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        iv_UserPhoto = (ImageView)findViewById(R.id.user_profile_photo);
+        userProfilePhoto = (ImageView)findViewById(R.id.user_profile_photo);
+        backgroundImage = (ImageView)findViewById(R.id.background_image);
+
 
 
     }
@@ -56,11 +60,13 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_photo:
+            case R.id.menu_user:
+                pickMenu = R.id.menu_user;
                 pictureSelected();
                 return true;
             case R.id.menu_background:
-
+                pickMenu = R.id.menu_background;
+                pictureSelected();
                 return true;
             case R.id.menu_name:
 
@@ -98,9 +104,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         new AlertDialog.Builder(this)
                 .setTitle("이미지 선택")
-                .setPositiveButton("사진촬영", cameraListener)
-                .setNeutralButton("앨범선택", albumListener)
-                .setNegativeButton("취소", cancelListener)
+                .setNeutralButton("취소", cancelListener)
+                .setNegativeButton("사진촬영", cameraListener)
+                .setPositiveButton("앨범선택", albumListener)
                 .show();
     }
 
@@ -182,11 +188,18 @@ public class ProfileActivity extends AppCompatActivity {
                 if(extras != null)
                 {
                     Bitmap photo = extras.getParcelable("data"); // CROP된 BITMAP
-                    iv_UserPhoto.setImageBitmap(photo); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
+
+                    switch (pickMenu) {
+                        case R.id.menu_user:
+                            userProfilePhoto.setImageBitmap(photo); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
+                            break;
+                        case R.id.menu_background:
+                            backgroundImage.setImageBitmap(photo); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
+                            break;
+                    }
 
                     storeCropImage(photo, filePath); // CROP된 이미지를 외부저장소, 앨범에 저장한다.
                     absoultePath = filePath;
-                    break;
 
                 }
                 // 임시 파일 삭제
@@ -211,7 +224,7 @@ public class ProfileActivity extends AppCompatActivity {
         File directory_SmartWheel = new File(dirPath);
 
         if(!directory_SmartWheel.exists()) // SmartWheel 디렉터리에 폴더가 없다면 (새로 이미지를 저장할 경우에 속한다.)
-            directory_SmartWheel.mkdir();
+            directory_SmartWheel.mkdirs();
 
         File copyFile = new File(filePath);
         BufferedOutputStream out = null;

@@ -8,8 +8,8 @@
         android:icon="@drawable/profile_picture">
         <menu>
             <item
-                android:id="@+id/menu_photo"
-                android:title="사진 변경"/>
+                android:id="@+id/menu_user"
+                android:title="프로필사진 변경"/>
             <item
                 android:id="@+id/menu_background"
                 android:title="배경사진 변경"/>
