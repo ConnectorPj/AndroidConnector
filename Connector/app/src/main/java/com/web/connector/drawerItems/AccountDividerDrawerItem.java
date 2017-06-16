@@ -11,12 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.mikepenz.iconics.typeface.IIcon;
+import com.web.connector.R;
 import com.mikepenz.materialdrawer.holder.ImageHolder;
 import com.mikepenz.materialdrawer.holder.StringHolder;
 import com.mikepenz.materialdrawer.model.AbstractDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialize.util.UIUtils;
-import com.project.last.connector.app.R;
 
 import java.util.List;
 

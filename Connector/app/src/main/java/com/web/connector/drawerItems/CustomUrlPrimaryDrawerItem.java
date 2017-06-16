@@ -6,10 +6,10 @@ import android.support.annotation.StringRes;
 import android.view.View;
 import android.widget.TextView;
 
+import com.web.connector.R;
 import com.mikepenz.materialdrawer.holder.BadgeStyle;
 import com.mikepenz.materialdrawer.holder.StringHolder;
 import com.mikepenz.materialdrawer.model.interfaces.ColorfulBadgeable;
-import com.project.last.connector.app.R;
 
 import java.util.List;
 

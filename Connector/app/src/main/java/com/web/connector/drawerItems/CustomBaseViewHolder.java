@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.project.last.connector.app.R;
+import com.web.connector.R;
 
 class CustomBaseViewHolder extends RecyclerView.ViewHolder {
     protected View view;

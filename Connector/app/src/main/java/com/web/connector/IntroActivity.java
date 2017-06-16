@@ -12,7 +12,7 @@ import android.view.WindowManager;
  */
 
 /** Intro 화면*/
-public class IntroActivity extends AppCompatActivity{
+public class IntroActivity extends AppCompatActivity {
     /** 로딩화면이 떠있는 시간(ms) **/
     private final int SPLASH_DISPLAY_LENGTH = 1000;
     @Override

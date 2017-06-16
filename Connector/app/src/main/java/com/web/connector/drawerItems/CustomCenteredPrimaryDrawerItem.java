@@ -1,7 +1,7 @@
 package com.web.connector.drawerItems;
 
+import com.web.connector.R;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.project.last.connector.app.R;
 
 public class CustomCenteredPrimaryDrawerItem extends PrimaryDrawerItem {
 

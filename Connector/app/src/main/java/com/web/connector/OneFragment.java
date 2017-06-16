@@ -36,7 +36,7 @@ public class OneFragment extends Fragment {
     private static final String TAG_CONTENT = "content";
     JSONArray posts = null;
     ArrayList<HashMap<String,String>> noticeList;
-    DBhelper  helper;
+    DBhelper helper;
     // UI 관련
     private RecyclerView rv;
     private LinearLayoutManager mLinearLayoutManager;
