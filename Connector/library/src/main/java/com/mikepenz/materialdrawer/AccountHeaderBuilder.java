@@ -1096,8 +1096,8 @@ public class AccountHeaderBuilder {
             }
 
             mAccountHeaderTextSection.setVisibility(View.VISIBLE);
-            handleSelectionView(mCurrentProfile, true);
-            mAccountSwitcherArrow.setVisibility(View.VISIBLE);
+            handleSelectionView(mCurrentProfile, false);
+            mAccountSwitcherArrow.setVisibility(View.INVISIBLE);
             mCurrentProfileView.setTag(R.id.material_drawer_profile_header, mCurrentProfile);
 
             StringHolder.applyTo(mCurrentProfile.getName(), mCurrentProfileName);
