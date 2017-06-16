@@ -1096,8 +1096,15 @@ public class AccountHeaderBuilder {
             }
 
             mAccountHeaderTextSection.setVisibility(View.VISIBLE);
+
+            /** 한글 주석*/
+            //true 면 이름, 이메일 부분이 클릭 된다.
             handleSelectionView(mCurrentProfile, false);
+
+            /** 한글 주석*/
+            //VISIBLE 하면 화살표가 보인다.
             mAccountSwitcherArrow.setVisibility(View.INVISIBLE);
+
             mCurrentProfileView.setTag(R.id.material_drawer_profile_header, mCurrentProfile);
 
             StringHolder.applyTo(mCurrentProfile.getName(), mCurrentProfileName);
