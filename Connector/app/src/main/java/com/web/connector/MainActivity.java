@@ -1,7 +1,6 @@
 package com.web.connector;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,7 +13,6 @@ import android.view.View;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
-import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.itemanimators.AlphaCrossFadeAnimator;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -22,7 +20,6 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
@@ -214,22 +211,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     // 홍의
+
+    /** 아이콘 지정 메소드*/
     private void setUpIcons(){
         for(int i = 0; i < tabIcons.length; i++){
             tabLayout.getTabAt(i).setIcon(tabIcons[i]);
         }
     }
-
+    /** 뷰페이저 설정 -> fragment 추가 및 지정*/
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "ONE");
-        adapter.addFragment(new TwoFragment(), "TWO");
-        adapter.addFragment(new ThreeFragment(), "THREE");
-        adapter.addFragment(new FourFragment(),"Four");
+        adapter.addFragment(new HomeFragment(), "ONE");
+        adapter.addFragment(new SearchFragment(), "TWO");
+        adapter.addFragment(new NotiFragment(), "THREE");
+        adapter.addFragment(new ChattingFragment(),"Four");
         viewPager.setAdapter(adapter);
     }
 
-
+  /** 필수! 어댑터에서 반드시 설정 해줘야함!! */
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -253,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
             mFragmentTitleList.add(title);
         }
 
+        /** tablayout에 이름을 설정하고 싶다면 여기서 */
         @Override
         public CharSequence getPageTitle(int position) {
             /*return mFragmentTitleList.get(position);*/

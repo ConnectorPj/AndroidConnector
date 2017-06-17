@@ -10,44 +10,86 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".IntroActivity"
+        <activity
+            android:name=".IntroActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WebActivity"></activity>
         <!-- theme 는 상수꺼 -->
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/MaterialDrawerTheme.Light.DarkToolbar"></activity>
-        <activity android:name=".TutorialActivity"></activity>
-        <activity android:name=".SignUpActivity"></activity>
-        <activity android:name=".SignInActivity"></activity>
-        <activity android:name=".MainPageActivity"></activity>
+        <activity
+            android:name=".TutorialActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".SignInActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".MainPageActivity"
+            android:screenOrientation="portrait"></activity>
 
         <!-- 상수 -->
         <activity
             android:name=".ProfileActivity"
             android:label="내 정보"
+            android:screenOrientation="portrait"
             android:theme="@style/MaterialDrawerTheme.Light.DarkToolbar" />
         <activity
             android:name=".NoticeActivity"
             android:label="공지사항"
+            android:screenOrientation="portrait"
             android:theme="@style/MaterialDrawerTheme.Light.DarkToolbar" />
         <activity
             android:name=".SettingsActivity"
             android:label="설정"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
             android:name=".MadeByActivity"
             android:label="개발자 정보"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <intent-filter>
                 <action android:name="MadeByActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <!-- Google Cloud Messaging 서비스 -->
+        <service
+            android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+     <!--   <service
+            android:name=".MyJobService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+            </intent-filter>
+        </service>-->
+        <!--  -->
+        <!-- <meta-data
+             android:name="com.google.firebase.messaging.default_notification_icon"
+             android:resource="@drawable/ic_stat_ic_notification" />
+         <meta-data
+             android:name="com.google.firebase.messaging.default_notification_color"
+             android:resource="@color/colorAccent" />-->
     </application>
 
 </manifest>

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+
 //wrap with try and catch so the build is working even if the signing stuff is missing
 try {
     apply from: '../../../signing.gradle'
@@ -21,22 +22,9 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
-        debug {
-            applicationIdSuffix ".debug"
-            versionNameSuffix "-DEBUG"
-            try {
-                signingConfig signingConfigs.debug
-            } catch (ex) {
-            }
-            minifyEnabled false
-        }
         release {
-            try {
-                signingConfig signingConfigs.release
-            } catch (ex) {
-            }
-            zipAlignEnabled true
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     lintOptions {
@@ -105,13 +93,17 @@ dependencies {
     compile 'com.android.support:support-vector-drawable:25.3.1'
 
 
-
-
-
+    compile 'com.google.firebase:firebase-core:10.0.1'
     compile 'com.google.firebase:firebase-messaging:10.0.1'
-    compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.4.2'
+    compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
     compile 'agency.tango.android:material-intro-screen:0.0.5'
 
+    // Glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
 }
+
+apply plugin: 'com.google.gms.google-services'
+

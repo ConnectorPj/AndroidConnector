@@ -61,3 +61,4 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         notiMng.notify((int)System.currentTimeMillis(), notiBuilder.build());
     }
 }
+
