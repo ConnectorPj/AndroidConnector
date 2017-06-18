@@ -37,6 +37,18 @@
             android:name=".MainPageActivity"
             android:screenOrientation="portrait"></activity>
 
+        <!-- 덕환 -->
+        <activity
+            android:name=".finClassActivity"
+            android:label="결제한 클래스 목록"
+            android:screenOrientation="portrait"
+            android:theme="@style/MaterialDrawerTheme.Light.DarkToolbar" />
+        <activity
+            android:name=".writeReplyActivity"
+            android:label="수업에 대한 댓글"
+            android:screenOrientation="portrait"
+            android:theme="@style/MaterialDrawerTheme.Light.DarkToolbar" />
+
         <!-- 상수 -->
         <activity
             android:name=".ProfileActivity"

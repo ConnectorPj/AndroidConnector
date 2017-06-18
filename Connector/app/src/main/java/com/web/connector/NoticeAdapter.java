@@ -28,6 +28,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
         this.noticeList = noticeList;
     }
 
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //recycler view에 반복될 아이템 레이아웃 연결
