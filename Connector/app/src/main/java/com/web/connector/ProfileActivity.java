@@ -3,9 +3,12 @@ package com.web.connector;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +18,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.web.connector.bean.CustomerBean;
+import com.web.connector.utils.HttpClient;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -33,19 +43,119 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView backgroundImage;
 
     private String absoultePath;
+    private CustomerBean customerBean;
+
+    private Handler handler = new Handler();
+    private TextView userProfileName;
+    private TextView userProfileContent;
+    private TextView userProfileGender;
+    private TextView userProfileCellphone;
+
+    /**
+     * Parameter type of doInBackground :Map
+     * Progress : Integer
+     * return type of doInBackground : String
+     */
+    public class NetworkTask extends AsyncTask<Map,Integer,String> {
+
+        private CustomProgressDialog customProgressDialog = new CustomProgressDialog(ProfileActivity.this);
+
+        /**
+         * doInBackground 실행되기 이전에 동작한다.
+         */
+        @Override protected void onPreExecute() {
+            customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+            customProgressDialog.show(); // Dialog 보여주기
+            super.onPreExecute();
+        }
+
+        /**
+         * 본 작업을 쓰레드로 처리해준다.
+         * ... 은 가변 배열 또는 가변 파라미터라고 부른다.
+         * a, b, c 이런식으로 보내도 되고 배열로 보내도 된다.
+         * @param maps
+         * @return
+         */
+        @Override
+        protected String doInBackground(Map... maps) {
+
+            // HTTP 요청 준비 작업
+            HttpClient.Builder http = new HttpClient.Builder("POST",
+                    "http://192.168.0.149:8181/androidProfile.do");
+
+            //파라미터를 전송한다.
+            http.addAllParameters(maps[0]);
+
+            // HTTP 요청 전송
+            HttpClient post = http.create();
+            post.request();
+
+            // 응답 상태코드 가져오기
+            int statusCode = post.getHttpStatusCode();
+
+            // 응답 본문 가져오기
+            String body = post.getBody();
+
+            return body;
+        }
+
+        /**
+         * @param s : doInBackground에서 리턴한 body
+         */
+        protected void onPostExecute(String s) {
+
+            Log.d("JSON_RESULT", s);
+
+            Gson gson = new Gson();
+            customerBean = gson.fromJson(s, CustomerBean.class);
+
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    userProfileName.setText(customerBean.getCustomerName());
+                    userProfileContent.setText(customerBean.getCustomerProfile());
+                    userProfileGender.setText(customerBean.getCustomerGender());
+                    userProfileCellphone.setText(customerBean.getCustomerCellphone());
+
+                    customProgressDialog.dismiss(); // Dialog 없애기
+                }
+            });
+
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        NetworkTask networkTask = new NetworkTask();
+        Map params = new HashMap();
+        //로그인정보를 확인 후 그 아이디를 넘겨줘야한다.
+        final CustomerBean customerBean = new CustomerBean();
+        customerBean.setCustomerId("bbb");
+
+        Gson gson = new Gson();
+        String json = gson.toJson(customerBean);
+
+        params.put("user",json);
+
+        networkTask.execute(params);
+
         setContentView(R.layout.activity_profile);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        userProfileName = (TextView)findViewById(R.id.user_profile_name);
+        userProfileContent = (TextView)findViewById(R.id.user_profile_content);
+        userProfileGender = (TextView)findViewById(R.id.user_profile_gender);
+        userProfileCellphone = (TextView)findViewById(R.id.user_profile_cellphone);
+
         userProfilePhoto = (ImageView)findViewById(R.id.user_profile_photo);
         backgroundImage = (ImageView)findViewById(R.id.background_image);
-
-
 
     }
 
@@ -120,7 +230,7 @@ public class ProfileActivity extends AppCompatActivity {
         String url = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
         mImageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
 
-        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
         startActivityForResult(intent, PICK_FROM_CAMERA);
     }
 
@@ -132,7 +242,7 @@ public class ProfileActivity extends AppCompatActivity {
     {
         // 앨범 호출
         Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(intent, PICK_FROM_ALBUM);
     }
 

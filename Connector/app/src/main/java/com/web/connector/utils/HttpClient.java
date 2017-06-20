@@ -1,4 +1,4 @@
-package com.web.connector;
+package com.web.connector.utils;
 
 import java.io.BufferedReader;
 
@@ -70,7 +70,7 @@ public class HttpClient {
         setContentType(connection);
         setRequestMethod(connection);
 
-        connection.setConnectTimeout(5000);
+        connection.setConnectTimeout(15000);
         connection.setDoOutput(true);
         connection.setDoInput(true);
     }
