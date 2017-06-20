@@ -20,8 +20,10 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.web.connector.bean.CustomerBean;
+import com.web.connector.bean.ProfileBean;
 import com.web.connector.utils.HttpClient;
 
 import java.io.BufferedOutputStream;
@@ -35,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
+    private static final String CONNECTOR_SITE = "http://jhu1993.cafe24.com";
 
     private int pickMenu = 0;
 
@@ -43,9 +46,10 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView backgroundImage;
 
     private String absoultePath;
-    private CustomerBean customerBean;
+    private ProfileBean profileBean;
 
     private Handler handler = new Handler();
+
     private TextView userProfileName;
     private TextView userProfileContent;
     private TextView userProfileGender;
@@ -82,7 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             // HTTP 요청 준비 작업
             HttpClient.Builder http = new HttpClient.Builder("POST",
-                    "http://192.168.0.149:8181/androidProfile.do");
+                    CONNECTOR_SITE + "/androidProfile.do");
 
             //파라미터를 전송한다.
             http.addAllParameters(maps[0]);
@@ -104,24 +108,26 @@ public class ProfileActivity extends AppCompatActivity {
          * @param s : doInBackground에서 리턴한 body
          */
         protected void onPostExecute(String s) {
-
             Log.d("JSON_RESULT", s);
 
             Gson gson = new Gson();
-            customerBean = gson.fromJson(s, CustomerBean.class);
+            profileBean = gson.fromJson(s, ProfileBean.class);
+            final String url = CONNECTOR_SITE + profileBean.getPhotoFileName();
 
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    userProfileName.setText(customerBean.getCustomerName());
-                    userProfileContent.setText(customerBean.getCustomerProfile());
-                    userProfileGender.setText(customerBean.getCustomerGender());
-                    userProfileCellphone.setText(customerBean.getCustomerCellphone());
+                    userProfileName.setText(profileBean.getUserName());
+                    userProfileContent.setText(profileBean.getUserProfile());
+                    userProfileGender.setText(profileBean.getUserGender());
+                    userProfileCellphone.setText(profileBean.getUserCellphone());
+
+                    Glide.with(ProfileActivity.this).load(url).into(userProfilePhoto);
 
                     customProgressDialog.dismiss(); // Dialog 없애기
-                }
-            });
 
+                }
+            }); //end of Handler
         }
 
     }
@@ -133,13 +139,9 @@ public class ProfileActivity extends AppCompatActivity {
         NetworkTask networkTask = new NetworkTask();
         Map params = new HashMap();
         //로그인정보를 확인 후 그 아이디를 넘겨줘야한다.
-        final CustomerBean customerBean = new CustomerBean();
-        customerBean.setCustomerId("bbb");
+        String userId = "dlqudgh@naver.com";
 
-        Gson gson = new Gson();
-        String json = gson.toJson(customerBean);
-
-        params.put("user",json);
+        params.put("userId",userId);
 
         networkTask.execute(params);
 
@@ -174,10 +176,10 @@ public class ProfileActivity extends AppCompatActivity {
                 pickMenu = R.id.menu_user;
                 pictureSelected();
                 return true;
-            case R.id.menu_background:
-                pickMenu = R.id.menu_background;
-                pictureSelected();
-                return true;
+//            case R.id.menu_background:
+//                pickMenu = R.id.menu_background;
+//                pictureSelected();
+//                return true;
             case R.id.menu_name:
 
                 return true;
@@ -303,9 +305,9 @@ public class ProfileActivity extends AppCompatActivity {
                         case R.id.menu_user:
                             userProfilePhoto.setImageBitmap(photo); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
                             break;
-                        case R.id.menu_background:
-                            backgroundImage.setImageBitmap(photo); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
-                            break;
+//                        case R.id.menu_background:
+//                            backgroundImage.setImageBitmap(photo); // 레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
+//                            break;
                     }
 
                     storeCropImage(photo, filePath); // CROP된 이미지를 외부저장소, 앨범에 저장한다.
