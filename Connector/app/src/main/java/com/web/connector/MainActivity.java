@@ -3,10 +3,8 @@ package com.web.connector;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.MainThread;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,10 +12,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
-import com.bumptech.glide.Glide;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.itemanimators.AlphaCrossFadeAnimator;
@@ -38,7 +34,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,13 +72,6 @@ public class MainActivity extends AppCompatActivity {
         profileBean = (ProfileBean) intent.getSerializableExtra("user");
         imagePath = profileBean.getPhotoFileName();
         final String imageUrl = CONNECTOR_SITE + imagePath;
-//        try {
-//            profileImage = Glide.with(MainActivity.this).load(imageUrl).asBitmap().into(50,50).get();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        }
 
         // 상수
         //Remove line to test RTL support
