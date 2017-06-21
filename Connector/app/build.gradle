@@ -110,6 +110,9 @@ dependencies {
     //circle profile image
     compile 'de.hdodenhof:circleimageview:1.2.1'
 
+    //expandableTextView
+    compile 'com.ms-square:expandableTextView:0.1.4'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

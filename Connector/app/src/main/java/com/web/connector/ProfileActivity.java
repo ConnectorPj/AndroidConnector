@@ -134,11 +134,13 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        profileBean = (ProfileBean) intent.getSerializableExtra("user");
 
         NetworkTask networkTask = new NetworkTask();
         Map params = new HashMap();
         //로그인정보를 확인 후 그 아이디를 넘겨줘야한다.
-        String userId = "dlqudgh@naver.com";
+        String userId = profileBean.getUserId();
 
         params.put("userId",userId);
 

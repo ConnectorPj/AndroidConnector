@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.MainThread;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,8 +14,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.itemanimators.AlphaCrossFadeAnimator;
@@ -34,6 +38,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
     //save our header or result
     private AccountHeader headerResult = null;
     private Drawer result = null;
+    private Bitmap profileImage = null;
+
+    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +76,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         profileBean = (ProfileBean) intent.getSerializableExtra("user");
         imagePath = profileBean.getPhotoFileName();
-        String imageUrl = CONNECTOR_SITE + imagePath;
+        final String imageUrl = CONNECTOR_SITE + imagePath;
+//        try {
+//            profileImage = Glide.with(MainActivity.this).load(imageUrl).asBitmap().into(50,50).get();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        }
 
         // 상수
         //Remove line to test RTL support
@@ -82,12 +97,13 @@ public class MainActivity extends AppCompatActivity {
         // NOTE you have to define the loader logic too. See the CustomApplication for more details
 //        final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon("https://avatars3.githubusercontent.com/u/1476232?v=3&s=460").withIdentifier(100);
 //        final IProfile profile2 = new ProfileDrawerItem().withName("Demo User").withEmail("demo@github.com").withIcon(Uri.parse("https://mikepenz.com/img/assets/logo-white.png")).withIdentifier(101);
-        final IProfile profile3 = new ProfileDrawerItem().withName(profileBean.getUserName()).withEmail(profileBean.getUserId()).withIcon(getBitmap(imageUrl)).withIdentifier(102);
+        final IProfile profile3 = new ProfileDrawerItem().withName(profileBean.getUserName()).withEmail(profileBean.getUserId()).withIcon(imageUrl).withIdentifier(102);
 //        final IProfile profile4 = new ProfileDrawerItem().withName("Felix House").withEmail("felix.house@gmail.com").withIcon(R.drawable.profile3).withIdentifier(103);
 //        final IProfile profile5 = new ProfileDrawerItem().withName("Mr. X").withEmail("mister.x.super@gmail.com").withIcon(R.drawable.profile4).withIdentifier(104);
 //        final IProfile profile6 = new ProfileDrawerItem().withName("Batman").withEmail("batman@gmail.com").withIcon(R.drawable.profile5).withIdentifier(105);
 
         // Create the AccountHeader
+
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withTranslucentStatusBar(true)
@@ -154,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = null;
                             if (drawerItem.getIdentifier() == 1) {
                                 intent = new Intent(MainActivity.this,ProfileActivity.class);
+                                intent.putExtra("user", profileBean);
                             } else if (drawerItem.getIdentifier() == 2) {
                                 intent = new Intent(MainActivity.this,NoticeActivity.class);
                             } else if (drawerItem.getIdentifier() == 3) {
@@ -275,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-  /** 필수! 어댑터에서 반드시 설정 해줘야함!! */
+    /** 필수! 어댑터에서 반드시 설정 해줘야함!! */
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -308,5 +325,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
 
