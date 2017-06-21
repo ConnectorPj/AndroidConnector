@@ -1,10 +1,12 @@
 package com.web.connector.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by kosta on 2017-06-20.
  */
 
-public class ProfileBean {
+public class ProfileBean implements Serializable{
 
     private String userId;
     private String userName;

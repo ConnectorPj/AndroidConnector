@@ -1,7 +1,5 @@
 package com.web.connector.bean;
 
-import java.util.Calendar;
-
 public class PhotoBean {
 	
 //	private MultipartFile upFile[];

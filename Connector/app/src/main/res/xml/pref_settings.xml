@@ -28,14 +28,6 @@
             <intent
                 android:action="MadeByActivity" />
         </Preference>
-        <Preference
-            android:summary="개발자에게 메일을 보냅니다"
-            android:title="메일 보내기" >
-            <intent
-                android:action="android.intent.action.SENDTO"
-                android:data="mailto:개발자이메일@naver.com" />
-        </Preference>
-
     </PreferenceCategory>
 
 </PreferenceScreen>

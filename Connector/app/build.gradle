@@ -92,7 +92,6 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:support-vector-drawable:25.3.1'
 
-    compile 'com.android.support:appcompat-v7:25.3.1'
 
     compile 'com.google.firebase:firebase-core:10.0.1'
     compile 'com.google.firebase:firebase-messaging:10.0.1'
@@ -101,11 +100,16 @@ dependencies {
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
     compile 'agency.tango.android:material-intro-screen:0.0.5'
 
+    compile 'com.yalantis:flipviewpager:1.0.0'
+    compile 'com.xgc1986.android:parallaxpagertransformer:1.0.4'
+
     // Glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
+
     //circle profile image
     compile 'de.hdodenhof:circleimageview:1.2.1'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

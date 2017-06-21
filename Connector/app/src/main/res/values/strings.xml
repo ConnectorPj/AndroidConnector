@@ -78,4 +78,7 @@
     <string name="backdrop_title">LOVE MUSIC</string>
     <string name="backdrop_subtitle">This season top 20 albums</string>
 
+    <string name="demo_parallax_description">Image of a cat</string>
+    <string name="demo_parallax_plus">+</string>
+
 </resources>

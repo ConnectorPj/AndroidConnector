@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.web.connector.bean.CustomerBean;
 import com.web.connector.bean.ProfileBean;
 import com.web.connector.utils.HttpClient;
 

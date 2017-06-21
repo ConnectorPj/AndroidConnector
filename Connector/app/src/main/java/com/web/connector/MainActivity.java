@@ -1,6 +1,9 @@
 package com.web.connector;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -24,7 +27,11 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.web.connector.bean.ProfileBean;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,9 +47,14 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.ic_question_answer_white_48dp
     };
 
+    // profileBean 객체
+    private ProfileBean profileBean;
+
     /** 상수 */
     private static final int PROFILE_SETTING = 100000;
-
+    // cafe24.com
+    private static final String CONNECTOR_SITE = "http://jhu1993.cafe24.com";
+    private String imagePath;
     //save our header or result
     private AccountHeader headerResult = null;
     private Drawer result = null;
@@ -52,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // signin, signup activity에서 보낸 intent 받아들이기
+        Intent intent = getIntent();
+        profileBean = (ProfileBean) intent.getSerializableExtra("user");
+        imagePath = profileBean.getPhotoFileName();
+        String imageUrl = CONNECTOR_SITE + imagePath;
 
         // 상수
         //Remove line to test RTL support
@@ -65,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         // NOTE you have to define the loader logic too. See the CustomApplication for more details
 //        final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon("https://avatars3.githubusercontent.com/u/1476232?v=3&s=460").withIdentifier(100);
 //        final IProfile profile2 = new ProfileDrawerItem().withName("Demo User").withEmail("demo@github.com").withIcon(Uri.parse("https://mikepenz.com/img/assets/logo-white.png")).withIdentifier(101);
-        final IProfile profile3 = new ProfileDrawerItem().withName("Max Muster").withEmail("max.mustermann@gmail.com").withIcon(R.drawable.profile2).withIdentifier(102);
+        final IProfile profile3 = new ProfileDrawerItem().withName(profileBean.getUserName()).withEmail(profileBean.getUserId()).withIcon(getBitmap(imageUrl)).withIdentifier(102);
 //        final IProfile profile4 = new ProfileDrawerItem().withName("Felix House").withEmail("felix.house@gmail.com").withIcon(R.drawable.profile3).withIdentifier(103);
 //        final IProfile profile5 = new ProfileDrawerItem().withName("Mr. X").withEmail("mister.x.super@gmail.com").withIcon(R.drawable.profile4).withIdentifier(104);
 //        final IProfile profile6 = new ProfileDrawerItem().withName("Batman").withEmail("batman@gmail.com").withIcon(R.drawable.profile5).withIdentifier(105);
@@ -211,6 +228,36 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     // 홍의
+
+    /**
+     * image url을 받아서 bitmap을 생성하고 리턴합니다
+     * @param url 얻고자 하는 image url
+     * @return 생성된 bitmap
+     */
+    private Bitmap getBitmap(String url) {
+        URL imgUrl = null;
+        HttpURLConnection connection = null;
+        InputStream is = null;
+
+        Bitmap retBitmap = null;
+
+        try{
+            imgUrl = new URL(url);
+            connection = (HttpURLConnection) imgUrl.openConnection();
+            connection.setDoInput(true); //url로 input받는 flag 허용
+            connection.connect(); //연결
+            is = connection.getInputStream(); // get inputstream
+            retBitmap = BitmapFactory.decodeStream(is);
+        }catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            if(connection!=null) {
+                connection.disconnect();
+            }
+            return retBitmap;
+        }
+    }
 
     /** 아이콘 지정 메소드*/
     private void setUpIcons(){
