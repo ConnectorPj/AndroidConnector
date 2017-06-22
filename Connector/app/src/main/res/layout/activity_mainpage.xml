@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="81dp"
-        android:text="메인화면"
-        android:textSize="20dp"/>
 
     <Button
         android:id="@+id/signInBtn"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_buttom"
+        android:background="@drawable/round_buttom2"
         android:text="@string/btn_sign_in"
-        android:textColor="@android:color/white"
+        android:textColor="#2c3d46"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="165dp" />
@@ -30,9 +21,9 @@
         android:id="@+id/signUpBtn"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_buttom"
+        android:background="@drawable/round_buttom2"
         android:text="@string/btn_sign_up"
-        android:textColor="@android:color/white"
+        android:textColor="#2c3d46"
         android:layout_below="@+id/signInBtn"
         android:layout_alignStart="@+id/signInBtn"
         android:layout_marginTop="25dp" />
