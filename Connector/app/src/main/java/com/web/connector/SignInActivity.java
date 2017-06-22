@@ -66,7 +66,7 @@ public class SignInActivity extends AppCompatActivity {
 
             // HTTP 요청 준비 작업
             HttpClient.Builder http = new HttpClient.Builder("POST",
-                    CONNECTOR_SITE + "/androidProfile.do");
+                    CONNECTOR_SITE + "/androidLogin.do");
 
             //파라미터를 전송한다.
             http.addAllParameters(maps[0]);
@@ -79,7 +79,7 @@ public class SignInActivity extends AppCompatActivity {
             int statusCode = post.getHttpStatusCode();
 
             // 응답 본문 가져오기
-              String body = post.getBody();
+            String body = post.getBody();
 
             return body;
         }

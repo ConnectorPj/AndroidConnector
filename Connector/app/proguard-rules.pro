@@ -8,6 +8,11 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+-libraryjars ../Connector/libs/naveroauthloginlib-4.x.x.jar
+-keep public class com.nhn.android.naverlogin.** {
+       public protected *;
+}
+
 
 # If your project uses WebView with JS, uncomment the following
 # and specify the fully qualified class name to the JavaScript interface

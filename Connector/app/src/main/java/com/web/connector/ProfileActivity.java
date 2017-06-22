@@ -32,7 +32,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
-
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
@@ -111,8 +110,13 @@ public class ProfileActivity extends AppCompatActivity {
 
             Gson gson = new Gson();
             profileBean = gson.fromJson(s, ProfileBean.class);
-            final String url = CONNECTOR_SITE + profileBean.getPhotoFileName();
-
+            final String url;
+            // photoFileName 이 null 일 경우 기본 사진 설정
+            if(profileBean.getPhotoFileName() == null){
+                url = "http://hicomputing.org/modules/board/skins/WhiteBoard/imgs/no_image.png";
+            }else{
+                url = CONNECTOR_SITE + profileBean.getPhotoFileName();
+            }
             handler.post(new Runnable() {
                 @Override
                 public void run() {

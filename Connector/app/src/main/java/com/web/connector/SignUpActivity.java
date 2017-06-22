@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -28,6 +29,8 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText inputName, inputEmail, inputPassword, inputPasswordCheck;
     private TextInputLayout inputLayoutName, inputLayoutEmail, inputLayoutPassword, inputLayoutPasswordCheck;
     private Button singUpBtn;
+    private RadioButton rdoStudent, rdoTeacher;
+    boolean isStudent;
 
 
     // cafe24.com 사이트
@@ -62,10 +65,16 @@ public class SignUpActivity extends AppCompatActivity {
          */
         @Override
         protected String doInBackground(Map... maps) {
+            String insertSite;
+            if(isStudent){
+                insertSite = "/androidInsertStudent.do";
+            }else{
+                insertSite = "/androidInsertTeacher.do";
+            }
 
             // HTTP 요청 준비 작업
             HttpClient.Builder http = new HttpClient.Builder("POST",
-                    CONNECTOR_SITE + "/androidInsert.do");
+                    CONNECTOR_SITE + insertSite);
 
             //파라미터를 전송한다.
             http.addAllParameters(maps[0]);
@@ -95,12 +104,14 @@ public class SignUpActivity extends AppCompatActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    customProgressDialog.dismiss(); // Dialog 없애기
-                    // 받아오기
-                    // 회원가입 과 동시에 로그인 하게 됨.
+
                     Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                     intent.putExtra("user", profileBean);
-                    SignUpActivity.this.startActivity(intent);
+                    // 인텐트가 준비된 후 dialog 없애기
+                    customProgressDialog.dismiss();
+                    // 받아오기
+                    // 회원가입 과 동시에 로그인 하게 됨.
+                   SignUpActivity.this.startActivity(intent);
                 }
             }); //end of Handler
         }
@@ -120,6 +131,8 @@ public class SignUpActivity extends AppCompatActivity {
         inputEmail = (EditText) findViewById(R.id.input_email);
         inputPassword = (EditText) findViewById(R.id.input_password);
         inputPasswordCheck = (EditText)findViewById(R.id.input_password_check);
+        rdoStudent = (RadioButton)findViewById(R.id.rdoStudent);
+        rdoTeacher = (RadioButton)findViewById(R.id.rdoTeacher);
         singUpBtn = (Button) findViewById(R.id.btn_signup);
 
         inputName.addTextChangedListener(new MyTextWatcher(inputName));
@@ -132,6 +145,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // 유효성 검사
                 submitForm();
+
             }
         });
     }
@@ -155,6 +169,13 @@ public class SignUpActivity extends AppCompatActivity {
         if( !validatePasswordCheck() ){
             return;
         }
+
+        if(rdoStudent.isChecked()){
+            isStudent = true;
+        }else {
+            isStudent = false;
+        }
+
         // 모든 조건 만족 시 -> 이름, 이메일, 비밀번호, 비밀번호 확인 조건 만족 시
         SignUpActivity.NetworkTask networkTask = new SignUpActivity.NetworkTask();
         Map params = new HashMap();

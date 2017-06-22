@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class ChattingFragmentAdapter extends BaseAdapter {
     // adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<ChatRoomItem> chatRooms = new ArrayList<ChatRoomItem>();
-    // NotiFragmentAdapter 기본 생성자
+    // ChattingFragmentAdapter 기본 생성자
     public ChattingFragmentAdapter(){
 
     }

@@ -1,4 +1,4 @@
-﻿<resources>
+<resources>
     <string name="app_name">Connector</string>
 
     <string name="action_settings">Settings</string>
@@ -80,5 +80,11 @@
 
     <string name="demo_parallax_description">Image of a cat</string>
     <string name="demo_parallax_plus">+</string>
+
+    <!-- search Fragment 카드뷰 -->
+    <string name="action_refresh">Settings</string>
+    <string name="action_new">Settings</string>
+    <string name="logo_desc">App logo</string>
+    <string name="country_name">Nigeria</string>
 
 </resources>

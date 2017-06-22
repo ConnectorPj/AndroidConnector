@@ -57,16 +57,10 @@
         android:layout_below="@+id/textView3"
         android:layout_alignStart="@+id/signUpBtn" />
 
-    <Button
-        android:id="@+id/naverBtn"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_buttom"
-        android:layout_alignStart="@+id/googleBtn"
-        android:layout_below="@+id/googleBtn"
-        android:layout_marginTop="30dp"
-        android:text="@string/btn_naver"
-        android:textColor="@android:color/white" />
+    <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
+        android:id="@+id/buttonOAuthLoginImg"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp" />
 
 
 </RelativeLayout>

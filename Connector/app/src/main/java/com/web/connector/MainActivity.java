@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private int[] tabIcons = {
             R.drawable.ic_home_white_48dp,
             R.drawable.ic_dashboard_white_48dp,
-            R.drawable.ic_notifications_white_48dp,
             R.drawable.ic_question_answer_white_48dp
     };
 
@@ -70,8 +69,12 @@ public class MainActivity extends AppCompatActivity {
         // signin, signup activity에서 보낸 intent 받아들이기
         Intent intent = getIntent();
         profileBean = (ProfileBean) intent.getSerializableExtra("user");
-        imagePath = profileBean.getPhotoFileName();
-        final String imageUrl = CONNECTOR_SITE + imagePath;
+        String imageUrl;
+        if(profileBean.getPhotoFileName() == null){
+            imageUrl = "http://hicomputing.org/modules/board/skins/WhiteBoard/imgs/no_image.png";
+        }else {
+            imageUrl = CONNECTOR_SITE + profileBean.getPhotoFileName();
+        }
 
         // 상수
         //Remove line to test RTL support
@@ -91,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
 //        final IProfile profile6 = new ProfileDrawerItem().withName("Batman").withEmail("batman@gmail.com").withIcon(R.drawable.profile5).withIdentifier(105);
 
         // Create the AccountHeader
-
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withTranslucentStatusBar(true)
@@ -275,12 +277,11 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "ONE");
         adapter.addFragment(new SearchFragment(), "TWO");
-        adapter.addFragment(new NotiFragment(), "THREE");
-        adapter.addFragment(new ChattingFragment(),"Four");
+        adapter.addFragment(new NotiFragment(),"Three");
         viewPager.setAdapter(adapter);
     }
 
-    /** 필수! 어댑터에서 반드시 설정 해줘야함!! */
+  /** 필수! 어댑터에서 반드시 설정 해줘야함!! */
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -313,4 +314,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
 
