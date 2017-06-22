@@ -25,7 +25,6 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(view.getContext(),countryName.getText().toString(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(view.getContext(), ClassDetailActivity.class);
         view.getContext().startActivity(intent);
 

@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private int[] tabIcons = {
             R.drawable.ic_home_white_48dp,
             R.drawable.ic_dashboard_white_48dp,
-            R.drawable.ic_question_answer_white_48dp
+            R.drawable.ic_notifications_white_48dp
     };
 
     // profileBean 객체
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                             } else if (drawerItem.getIdentifier() == 3) {
                                 intent = new Intent(MainActivity.this,SettingsActivity.class);
                             } else if (drawerItem.getIdentifier() == 4) {
-
+                                intent = new Intent(MainActivity.this, MainPageActivity.class);
                             }
                             if (intent != null) {
                                 MainActivity.this.startActivity(intent);

@@ -60,18 +60,18 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Album album = albumList.get(position);
         holder.title.setText(album.getName());
-        holder.count.setText(album.getNumOfSongs() + " songs");
+        holder.count.setText(album.getNumOfSongs() +"");
 
         // loading album cover using Glide library
         Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
 
-        holder.thumbnail.setOnClickListener(new View.OnClickListener() {
+     /*   holder.thumbnail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent appInfo = new Intent(mContext, finClassActivity.class);
                 mContext.startActivity(appInfo);
             }
-        });
+        });*/
     }
 
     /**
@@ -106,7 +106,7 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
                 default:
             }*/
 
-            Toast.makeText(mContext, "Play next", Toast.LENGTH_SHORT).show();
+       /*     Toast.makeText(mContext, "Play next", Toast.LENGTH_SHORT).show();*/
 
             return false;
         }

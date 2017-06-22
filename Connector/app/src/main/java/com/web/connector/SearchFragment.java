@@ -158,11 +158,11 @@ public class SearchFragment extends Fragment {
     private List<ItemObject> getAllItemList(){
 
         List<ItemObject> allItems = new ArrayList<ItemObject>();
-        /*allItems.add(new ItemObject("United States", R.drawable.album1));
-        allItems.add(new ItemObject("Canada", R.drawable.album2));
-        allItems.add(new ItemObject("United Kingdom", R.drawable.album3));
-        allItems.add(new ItemObject("Germany", R.drawable.album4));
-        allItems.add(new ItemObject("Sweden", R.drawable.album5));*/
+        allItems.add(new ItemObject("아두이노", R.drawable.iotarduino));
+        allItems.add(new ItemObject("IOS 초보", R.drawable.androidandios));
+        allItems.add(new ItemObject("안드로이드", R.drawable.androidstart));
+        allItems.add(new ItemObject("C언어", R.drawable.clanguage));
+        allItems.add(new ItemObject("HTML", R.drawable.html));
 
         return allItems;
     }

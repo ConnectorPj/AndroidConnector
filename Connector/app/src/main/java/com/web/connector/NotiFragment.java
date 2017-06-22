@@ -46,13 +46,13 @@ public class NotiFragment extends Fragment {
             initItems();
         }
         // listView 리스너
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+      /*  listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getActivity(), position +"번째" , Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
         return view;
     }
     // 중복 제거
@@ -60,9 +60,9 @@ public class NotiFragment extends Fragment {
         // 먼저 멤버변수 init을 true로 만들어 준다. -> 초기만 가능하도록
         init = true;
         // 여기서 필요한 정보를 집어넣는다.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.profile3),"List1","Number One");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.profile4),"List2","Number Two");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.profile5),"List3","Number Three");
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.teacher1),"JAVA, C#, 안드로이드 '쇠뇌'교육!","수강신청을 확인하였습니다.");
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.teacher2),"Coding의 기본 JAVA, C, C#, C++","수강신청을 확인하였습니다.");
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.profile5),"공지사항","Connector에 가입하신것을 축하드립니다!");
 
 
     }

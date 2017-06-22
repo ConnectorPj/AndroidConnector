@@ -82,46 +82,45 @@ public class HomeFragment extends Fragment {
      */
     private void prepareAlbums() {
         int[] covers = new int[]{
-                R.drawable.album1,
-                R.drawable.album2,
-                R.drawable.album3,
-                R.drawable.album4,
-                R.drawable.album5,
-                R.drawable.album6,
-                R.drawable.album7,
-                R.drawable.album8,
-                R.drawable.album9,
-                R.drawable.album10,
-                R.drawable.album11};
+                R.drawable.iotarduino,
+                R.drawable.coding2,
+                R.drawable.androidandios,
+                R.drawable.coding,
+                R.drawable.iotarduino,
+                R.drawable.iotthing,
+                R.drawable.clanguage,
+                R.drawable.javagod,
+                R.drawable.rasbarry,
+                R.drawable.html};
 
-        Album a = new Album("True Romance", 13, covers[0]);
+        Album a = new Album("아두이노", 13, covers[0]);
         albumList.add(a);
 
-        a = new Album("Xscpae", 8, covers[1]);
+        a = new Album("ios 초보", 8, covers[1]);
         albumList.add(a);
 
-        a = new Album("Maroon 5", 11, covers[2]);
+        a = new Album("안드로이드 중급", 11, covers[2]);
         albumList.add(a);
 
-        a = new Album("Born to Die", 12, covers[3]);
+        a = new Album("안드로이드 초급", 12, covers[3]);
         albumList.add(a);
 
-        a = new Album("Honeymoon", 14, covers[4]);
+        a = new Album("재밌는 아두이노", 14, covers[4]);
         albumList.add(a);
 
-        a = new Album("I Need a Doctor", 1, covers[5]);
+        a = new Album("라즈베리 파이", 1, covers[5]);
         albumList.add(a);
 
-        a = new Album("Loud", 11, covers[6]);
+        a = new Album("C언어", 11, covers[6]);
         albumList.add(a);
 
-        a = new Album("Legend", 14, covers[7]);
+        a = new Album("자바의 신", 14, covers[7]);
         albumList.add(a);
 
-        a = new Album("Hello", 11, covers[8]);
+        a = new Album("쉬운 라즈베리 파이", 11, covers[8]);
         albumList.add(a);
 
-        a = new Album("Greatest Hits", 17, covers[9]);
+        a = new Album("HTML", 17, covers[9]);
         albumList.add(a);
 
         adapter.notifyDataSetChanged();

@@ -9,9 +9,9 @@ import android.widget.ImageButton;
 
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
-import com.web.connector.R;
 import com.mikepenz.materialdrawer.model.BaseDescribeableDrawerItem;
 import com.mikepenz.materialdrawer.model.BaseViewHolder;
+import com.web.connector.R;
 
 import java.util.List;
 

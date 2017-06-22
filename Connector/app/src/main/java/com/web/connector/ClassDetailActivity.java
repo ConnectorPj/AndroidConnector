@@ -1,6 +1,7 @@
 package com.web.connector;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,6 +33,7 @@ public class ClassDetailActivity extends AppCompatActivity{
     private ClassDetailActivity.JSInterface mJSInterface;
     private String mTokenId;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,9 @@ public class ClassDetailActivity extends AppCompatActivity{
 //        mWebView.loadUrl("file:///android_asset/www/sample.html");
         // iptime5G 잡고 실험을 권장??? 이 ip를 알기 위해선 cmd > ipconfig >
         // 무선랜 어댑터 무선 네트워크 연결 부분의 IPv4주소임 114번 라인의 URL과 같은 주소여야함
-        mWebView.loadUrl("http://jhu1993.cafe24.com/main.do");
+        mWebView.loadUrl("http://jhu1993.cafe24.com/search.do");
+
+
 
         // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
@@ -124,12 +128,10 @@ public class ClassDetailActivity extends AppCompatActivity{
     class WebViewClientHandler extends WebViewClient {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            Toast.makeText(getApplicationContext(), "onPageStarted" + url, Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
-            Toast.makeText(getApplicationContext(), "onPageFinished" + url, Toast.LENGTH_SHORT).show();
         }
     }
 }

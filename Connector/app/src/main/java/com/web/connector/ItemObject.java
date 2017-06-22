@@ -7,9 +7,9 @@ package com.web.connector;
 public class ItemObject {
 
     private String name;
-    private String photo;
+    private int photo;
 
-    public ItemObject(String name, String photo) {
+    public ItemObject(String name, int photo) {
         this.name = name;
         this.photo = photo;
     }
@@ -22,11 +22,11 @@ public class ItemObject {
         this.name = name;
     }
 
-    public String getPhoto() {
+    public int getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(int photo) {
         this.photo = photo;
     }
 

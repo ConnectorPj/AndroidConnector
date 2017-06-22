@@ -12,10 +12,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.mikepenz.iconics.typeface.IIcon;
-import com.web.connector.R;
 import com.mikepenz.materialdrawer.holder.ColorHolder;
 import com.mikepenz.materialdrawer.holder.ImageHolder;
 import com.mikepenz.materialdrawer.model.AbstractDrawerItem;
+import com.web.connector.R;
 
 import java.util.List;
 
