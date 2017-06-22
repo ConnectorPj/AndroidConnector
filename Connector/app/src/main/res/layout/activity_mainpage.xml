@@ -21,9 +21,9 @@
         android:id="@+id/signUpBtn"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_buttom2"
+        android:background="@drawable/round_buttom"
         android:text="@string/btn_sign_up"
-        android:textColor="#2c3d46"
+        android:textColor="@android:color/white"
         android:layout_below="@+id/signInBtn"
         android:layout_alignStart="@+id/signInBtn"
         android:layout_marginTop="25dp" />
